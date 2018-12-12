@@ -1,0 +1,24 @@
+button{
+  margin: 5px;
+}
+
+#wrapper {
+    width: 500px;
+    border: 1px solid black;
+    overflow: hidden; /* will contain if #first is longer than #second */
+}
+#builder {
+    width: 300px;
+    float:left; /* add this */
+    border: 1px solid red;
+}
+
+#threejs {
+    background-color: #000;
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    padding: 0px;
+    position: absolute;; /* fixed or static */
+    right: 0;
+}

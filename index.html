@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<script src='vendor/three.js/build/three.min.js'></script>
+<script src='vendor/three.js/examples/js/controls/OrbitControls.js'></script>
+<script src='vendor/three.js/examples/js/controls/FirstPersonControls.js'></script>
+<script src='util.js'></script>
+<script src='consts.js'></script>
+<script src='Robot.js'></script>
+<script src='components/Component.js'></script>
+<script src='components/Arm.js'></script>
+<script src='components/Servo.js'></script>
+<script src='components/Tracer.js'></script>
+<script src='builder.js'></script>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<!-- <div style='position: absolute; top: 0px; width: 100%;font-family:arial; font-weight: bolder; padding-top: 5px;'> -->
+<body style='margin: 0px; overflow: hidden; text-align:center;'>
+    <div id="builder" class="" style="left:0">
+        <select class="dropdown">
+            <option value="Servo">
+            <option value="Arm">
+        </select>
+        <button style="top:30px; width: 100px" id="node" class="ui" onclick="robot.buildLast(new Arm(0xffff00, 10))">Arm</button>
+        <button style="top:30px; width: 100px" id="node" class="ui" onclick="robot.buildLast(new Servo(0x0099ff))">Servo</button>
+        <button style="top:30px; width: 100px" id="node" class="ui" onclick="robot.buildLast(new Tracer(0xff0000, 600))">Tracer</button>
+
+        <div id="robottree">
+        </div>
+    </div>
+    <div id="threejs" />
+    <script src='main.js'></script>
+</body>
