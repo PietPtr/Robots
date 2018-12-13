@@ -26,7 +26,7 @@ class Tracer extends Component{
 
     draw() {
         var geometry = new THREE.Geometry();
-        var material = new THREE.LineBasicMaterial({ color: this.color });
+        var material = new THREE.LineBasicMaterial({ color: this.color, linewidth: 10 });
         geometry.vertices = this.points;
         this.line = new THREE.Line(geometry, material)
         this.line.name = this.name

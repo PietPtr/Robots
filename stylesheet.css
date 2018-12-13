@@ -8,7 +8,7 @@ button{
     overflow: hidden; /* will contain if #first is longer than #second */
 }
 #builder {
-    width: 300px;
+    /*width: 300px;*/
     float:left; /* add this */
     border: 1px solid red;
 }

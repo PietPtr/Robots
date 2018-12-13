@@ -14,7 +14,7 @@ function toggleBuilder() {
 //		Initialisation
 //////////////////////////////////////////////////////////////////////////////////
 
-var width = window.innerWidth / 2;
+var width = window.innerWidth / 1.5;
 var height = window.innerHeight;
 
 container = document.getElementById('threejs');
