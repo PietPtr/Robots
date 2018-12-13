@@ -13,19 +13,54 @@
 <script src='builder.js'></script>
 <link rel="stylesheet" type="text/css" href="stylesheet.css">
 <!-- <div style='position: absolute; top: 0px; width: 100%;font-family:arial; font-weight: bolder; padding-top: 5px;'> -->
-<body style='margin: 0px; overflow: hidden; text-align:center;'>
+<body style='margin: 0px; overflow: hidden;'>
     <div id="builder" class="" style="left:0">
-        <select class="dropdown">
-            <option value="Servo">
-            <option value="Arm">
-        </select>
-        <button style="top:30px; width: 100px" id="node" class="ui" onclick="robot.buildLast(new Arm(0xffff00, 10))">Arm</button>
-        <button style="top:30px; width: 100px" id="node" class="ui" onclick="robot.buildLast(new Servo(0x0099ff))">Servo</button>
-        <button style="top:30px; width: 100px" id="node" class="ui" onclick="robot.buildLast(new Tracer(0xff0000, 600))">Tracer</button>
+        <button style="top:30px; width: 100px" id="node" class="ui" onclick="robot.buildAtSelector(new Arm(0xffff00, 10))">Arm</button>
+        <button style="top:30px; width: 100px" id="node" class="ui" onclick="robot.buildAtSelector(new Servo(0x0099ff))">Servo</button>
+        <button style="top:30px; width: 100px" id="node" class="ui" onclick="robot.buildAtSelector(new Tracer(0xff0000, 1000))">Tracer</button>
+        <br>
+        <div id="selector">
+            Select other component
+            <button class="ui" onclick="robot.selectorDown()"><</button>
+            <button class="ui" onclick="robot.selectorUp()">></button>
+            <button class="ui" onclick="robot.removeSelected()">Delete Selected</button>
+        </div>
+        <input id="componentIndex" style="display:none">
+        <div id="servoEditor" style="display:none">
+            Servo Editor <br>
+            Color: <input id="servoColor"><br>
+        </div>
+        <div id="armEditor" style="display:none">
+            Arm Editor <br>
+            Color: <input id="armColor"> <br>
+            Length: <input type="number" id="armLength"> <br>
+        </div>
+        <div id="tracerEditor" style="display:none">
+            Tracer Editor <br>
+            Color: <input id="tracerColor"> <br>
+            Max line length: <input type="number" id="tracerLength"> <br>
+        </div>
+        <div id="RotOffEditor">
+            Offset: <br>
+            X <input type="number" id="offsetx"/> <br>
+            Y <input type="number" id="offsety"/> <br>
+            Z <input type="number" id="offsetz"/> <br>
+            Rotation: <br>
+            X <input type="number" id="rotx"/> <br>
+            Y <input type="number" id="roty"/> <br>
+            Z <input type="number" id="rotz"/> <br>
+        </div>
+        <button onClick="confirmEdit()">Confirm</button>
 
         <div id="robottree">
         </div>
     </div>
+    <div class="new_component"/>
     <div id="threejs" />
     <script src='main.js'></script>
+
+    <!-- <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script> -->
+    <!-- <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script> -->
+    <!-- <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="react.js" type="text/babel"></script> -->
 </body>

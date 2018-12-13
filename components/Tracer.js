@@ -33,4 +33,12 @@ class Tracer extends Component{
         scene.remove(scene.getObjectByName(this.name));
         scene.add(this.line);
     }
+
+    getVars() {
+        var vars = super.getVars();
+        vars.tracerColor = this.color;
+        vars.tracerLength = this.max;
+
+        return vars;
+    }
 }

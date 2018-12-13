@@ -13,4 +13,20 @@ class Arm extends Component{
         var material = new THREE.MeshPhongMaterial( {color: this.color} );
         this.mesh = new THREE.Mesh( geometry, material );
     }
+
+    getVars() {
+        var vars = super.getVars();
+        vars.armColor = this.color;
+        vars.armLength = this.length;
+
+        return vars;
+    }
+
+    setVars(vars) {
+        super.setVars(vars);
+        if (vars.armColor && vars.armLength) {
+            this.color = vars.armColor;
+            this.length = vars.armLength;
+        }
+    }
 }

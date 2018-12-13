@@ -38,7 +38,7 @@ var camera = new THREE.PerspectiveCamera(70, width / height, 0.01, 1000);
 camera.position.x = 0;
 camera.position.y = 40
 camera.position.z = 80;
-var controls = new THREE.OrbitControls(camera);
+var controls = new THREE.OrbitControls(camera, container);
 
 //////////////////////////////////////////////////////////////////////////////////
 //		Scene setup
