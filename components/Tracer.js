@@ -36,9 +36,18 @@ class Tracer extends Component{
 
     getVars() {
         var vars = super.getVars();
-        vars.tracerColor = this.color;
+        vars.tracerColor = numToHexColor(this.color);
         vars.tracerLength = this.max;
 
         return vars;
+    }
+
+    setVars(vars) {
+        super.setVars(vars);
+
+        if (vars.tracerColor && vars.tracerLength) {
+            this.color = hexToNumColor(vars.servoColor);
+            this.max = parseFloat(vars.tracerLength);
+        }
     }
 }

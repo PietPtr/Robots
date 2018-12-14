@@ -24,7 +24,6 @@ class Servo extends Component{
         super.onAdd(parent);
         parent.mesh.add(this.holderMesh)
 
-
         this.holderMesh.position.set(
             parent.connectPos.x + this.offset.x,
             parent.connectPos.y + this.offset.y,
@@ -38,8 +37,26 @@ class Servo extends Component{
 
     getVars() {
         var vars = super.getVars();
-        vars.servoColor = this.color;
+        vars.servoColor = numToHexColor(this.color);
 
         return vars;
+    }
+
+    setVars(vars) {
+        super.setVars(vars);
+
+        if (vars.servoColor) {
+            this.color = hexToNumColor(vars.servoColor);
+        }
+    }
+
+    applyVars() {
+        super.applyVars();
+
+        this.holderMesh.position.set(
+            this.parent.connectPos.x + this.offset.x,
+            this.parent.connectPos.y + this.offset.y,
+            this.parent.connectPos.z + this.offset.z);
+        this.holderMesh.rotation.set(this.rotation.x, this.rotation.y, this.rotation.z);
     }
 }

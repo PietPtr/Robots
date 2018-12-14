@@ -15,15 +15,15 @@
 <!-- <div style='position: absolute; top: 0px; width: 100%;font-family:arial; font-weight: bolder; padding-top: 5px;'> -->
 <body style='margin: 0px; overflow: hidden;'>
     <div id="builder" class="" style="left:0">
-        <button style="top:30px; width: 100px" id="node" class="ui" onclick="robot.buildAtSelector(new Arm(0xffff00, 10))">Arm</button>
-        <button style="top:30px; width: 100px" id="node" class="ui" onclick="robot.buildAtSelector(new Servo(0x0099ff))">Servo</button>
-        <button style="top:30px; width: 100px" id="node" class="ui" onclick="robot.buildAtSelector(new Tracer(0xff0000, 1000))">Tracer</button>
+        <button style="top:30px; width: 80px" id="node" class="ui" onclick="robot.buildAtSelector(new Arm(0xffff00, 10))">Arm</button>
+        <button style="top:30px; width: 80px" id="node" class="ui" onclick="robot.buildAtSelector(new Servo(0x0099ff))">Servo</button>
+        <button style="top:30px; width: 80px" id="node" class="ui" onclick="robot.buildAtSelector(new Tracer(0xff0000, 1000))">Tracer</button>
         <br>
         <div id="selector">
             Select other component
             <button class="ui" onclick="robot.selectorDown()"><</button>
             <button class="ui" onclick="robot.selectorUp()">></button>
-            <button class="ui" onclick="robot.removeSelected()">Delete Selected</button>
+            <button class="ui" onclick="robot.removeSelected()">Delete</button>
         </div>
         <input id="componentIndex" style="display:none">
         <div id="servoEditor" style="display:none">

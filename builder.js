@@ -1,16 +1,4 @@
 
-function addRobotTree(robot) {
-    console.log(robot.components);
-    var div = document.getElementById("robottree");
-    console.log(div)
-    var currentComponent = robot.root;
-
-    for (var child of robot.root.childComponents) {
-        console.log(child);
-    }
-}
-
-
 const idToClass = {"servoEditor": Servo, "armEditor": Arm, "tracerEditor": Tracer};
 
 function onSelectorChange(component, index) {
@@ -50,10 +38,12 @@ function confirmEdit() {
     var offRotDiv = document.getElementById("RotOffEditor");
     for (var node of offRotDiv.childNodes) {
         if (node.nodeName == "INPUT") {
-            console.log(node.id, node.value)
             vars[node.id] = node.value;
         }
     }
 
-    
+    var index = parseInt(document.getElementById("componentIndex").value);
+    robot.components[index].setVars(vars);
+    robot.components[index].applyVars();
+
 }

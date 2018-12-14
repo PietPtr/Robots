@@ -9,7 +9,7 @@ class Robot {
         this.components = [this.root]
 
         this.selector = 0;
-        onSelectorChange(this.root);
+        this.updateBuilder();
     }
 
     build(id, component) {
