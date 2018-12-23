@@ -96,7 +96,14 @@ window.addEventListener('click', function() {
 	if (intersected) {
 		robot.selector = robot.components.findIndex(x => x.mesh.uuid == intersected.uuid)
 	}
-})
+}, false);
+
+window.addEventListener('keypress', function() {
+	if (event.keyCode == 127) {
+		robot.removeSelected();
+	}
+
+}, false);
 
 onRenderFcts.push(function(){
     raycaster.setFromCamera( mouse, camera );
@@ -104,7 +111,7 @@ onRenderFcts.push(function(){
 
     if (intersects.length > 0) {
         intersected = intersects[0].object;
-        intersected.material.emissive.setHex(0x990000);
+        intersected.material.emissive.setHex(0x330000);
     }
     else {
         if (intersected) {

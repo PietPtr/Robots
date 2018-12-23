@@ -41,7 +41,7 @@ class Robot {
                 comp.rotate(0.5 * delta);
             }
             if (comp === this.components[this.selector]) {
-                comp.mesh.material.emissive.setHex(0x129933);
+                comp.mesh.material.emissive.setHex(0x003300);
             } else {
                 comp.mesh.material.emissive.setHex(0x000000);
             }
