@@ -41,9 +41,9 @@ class Robot {
                 comp.rotate(0.5 * delta);
             }
             if (comp === this.components[this.selector]) {
-                comp.mesh.material.color.setHex(0x12cc33);
+                comp.mesh.material.emissive.setHex(0x129933);
             } else {
-                comp.mesh.material.color.setHex(comp.color);
+                comp.mesh.material.emissive.setHex(0x000000);
             }
         }
 
@@ -113,7 +113,7 @@ class Robot {
 
     fromJSON(json) {
         this.components = [];
-        this.root = new Root({color: 0xab55ab});
+        this.root = new Root({color: 0xffffff});
         scene.add(this.root.mesh);
 
         this.parseJSON([[json, this.root]]);

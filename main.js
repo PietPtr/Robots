@@ -1,14 +1,22 @@
 //////////////////////////////////////////////////////////////////////////////////
 //		HTML bullshit
 //////////////////////////////////////////////////////////////////////////////////
-function toggleBuilder() {
-    var elem = document.getElementById("builder");
-    if (elem.style.display === "none") {
-        elem.style.display = "block";
-    } else {
-        elem.style.display = "none";
-    }
-}
+// function toggleBuilder() {
+//     var elem = document.getElementById("builder");
+//     if (elem.style.display === "none") {
+//         elem.style.display = "block";
+//     } else {
+//         elem.style.display = "none";
+//     }
+// }
+
+function onDocumentMouseMove( event ) {
+				event.preventDefault();
+				mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+			}
+
+
 
 //////////////////////////////////////////////////////////////////////////////////
 //		Initialisation
@@ -39,6 +47,11 @@ camera.position.x = 0;
 camera.position.y = 40
 camera.position.z = 80;
 var controls = new THREE.OrbitControls(camera, container);
+
+
+var raycaster = new THREE.Raycaster();
+var mouse = new THREE.Vector2();
+var intersected;
 
 //////////////////////////////////////////////////////////////////////////////////
 //		Scene setup
@@ -72,7 +85,37 @@ window.addEventListener('resize', function(){
     container.style.height = height + "px";
 }, false);
 
+window.addEventListener('mousemove', function() {
+	event.preventDefault();
+    var diffW = window.innerWidth - width
+	mouse.x = ((event.clientX) / width) * 2 - 2;
+	mouse.y = -(event.clientY / height) * 2 + 1;
+}, false);
+
+window.addEventListener('click', function() {
+	if (intersected) {
+		robot.selector = robot.components.findIndex(x => x.mesh.uuid == intersected.uuid)
+	}
+})
+
 onRenderFcts.push(function(){
+    raycaster.setFromCamera( mouse, camera );
+    var intersects = raycaster.intersectObjects(robot.components.map(x => x.mesh));
+
+    if (intersects.length > 0) {
+        intersected = intersects[0].object;
+        intersected.material.emissive.setHex(0x990000);
+    }
+    else {
+        if (intersected) {
+            intersected.material.emissive.setHex(0);
+        }
+
+		intersected = null;
+    }
+
+    // console.log(mouse);
+
     renderer.render( scene, camera );
 });
 
