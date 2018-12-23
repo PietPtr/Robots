@@ -60,10 +60,21 @@ class Robot {
         for (var child of parent.childComponents) {
             if (child === toBeRemoved) {
                 parent.remove(child);
-                this.components.splice(index, 1);
-                this.selectLast();
                 break;
             }
+        }
+
+        this.removeFromComponents(toBeRemoved);
+
+        this.selectLast();
+    }
+
+    removeFromComponents(component) {
+        var index = this.components.findIndex(x => x.name == component.name);
+        this.components.splice(index, 1);
+
+        for (var child of component.childComponents) {
+            this.removeFromComponents(child);
         }
     }
 

@@ -28,6 +28,8 @@ class Component {
 
     remove(component) {
         this.mesh.remove(component.mesh);
+        var index = this.childComponents.findIndex(x => x.name == component.name);
+        this.childComponents.splice(index, 1)
         component.onRemove(this);
     }
 

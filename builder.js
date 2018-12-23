@@ -62,7 +62,7 @@ function importRobot() {
     textarea = document.getElementById("robotJSON");
     json = JSON.parse(textarea.value);
 
-    console.log();
+    scene.remove(robot.root.mesh);
 
     robot = new Robot()
     robot.fromJSON(json);
