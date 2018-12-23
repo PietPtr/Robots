@@ -55,7 +55,7 @@ const typeToClass = {"Arm": Arm, "Servo": Servo, "Tracer": Tracer};
 
 function exportRobot(robot) {
     textarea = document.getElementById("robotJSON");
-    textarea.value = JSON.stringify(robot.root.toJSON());
+    textarea.value = JSON.stringify(robot.toJSON());
 }
 
 function importRobot() {
@@ -66,4 +66,24 @@ function importRobot() {
 
     robot = new Robot()
     robot.fromJSON(json);
+}
+
+function checkRoboCode() {
+
+}
+
+function setRoboCode() {
+    robot.code = document.getElementById("roboCode").value;
+}
+
+function addSelectedToCode() {
+    var codeArea = document.getElementById("roboCode");
+    console.log(codeArea.selectionStart, codeArea.selectionEnd);
+    var code = codeArea.value;
+    code = code.slice(0, codeArea.selectionStart) +
+            "robot.part('" + robot.getCurrentComponent().name + "')"
+            + code.slice(codeArea.selectionEnd, code.length);
+
+    console.log(code);
+    codeArea.value = code;
 }

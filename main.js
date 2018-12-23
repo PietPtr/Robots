@@ -66,8 +66,9 @@ var light = new THREE.AmbientLight( 0x404040 ); // soft white light
 scene.add( light );
 
 
-var root = new Arm({color: 0xffff00, length: 5});
-var robot = new Robot(root);
+var robot = new Robot();
+
+var roboCode = "";
 
 //////////////////////////////////////////////////////////////////////////////////
 //		Rendering
@@ -85,20 +86,20 @@ window.addEventListener('resize', function(){
     container.style.height = height + "px";
 }, false);
 
-window.addEventListener('mousemove', function() {
+container.addEventListener('mousemove', function() {
 	event.preventDefault();
     var diffW = window.innerWidth - width
 	mouse.x = ((event.clientX) / width) * 2 - 2;
 	mouse.y = -(event.clientY / height) * 2 + 1;
 }, false);
 
-window.addEventListener('click', function() {
+container.addEventListener('click', function() {
 	if (intersected) {
 		robot.selector = robot.components.findIndex(x => x.mesh.uuid == intersected.uuid)
 	}
 }, false);
 
-window.addEventListener('keypress', function() {
+container.addEventListener('keypress', function() {
 	if (event.keyCode == 127) {
 		robot.removeSelected();
 	}
@@ -121,19 +122,10 @@ onRenderFcts.push(function(){
 		intersected = null;
     }
 
-    // console.log(mouse);
-
     renderer.render( scene, camera );
 });
 
 onRenderFcts.push((delta) => {
-    delta = delta
-});
-
-onRenderFcts.push((delta) => {
-    // var endPointPosition = new THREE.Vector3();
-    // endPointPosition.setFromMatrixPosition(cylinder2.matrixWorld);
-
     robot.update(delta);
 });
 

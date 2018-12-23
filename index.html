@@ -52,12 +52,16 @@
             Z <input type="number" id="rotz"/> <br>
         </div>
         <button onClick="confirmEdit()">Confirm</button>
+        <button onclick="addSelectedToCode()">Add to code</button>
         <div>
             <button onClick="importRobot(robot)">Import</button>
             <button onClick="exportRobot(robot)">Export</button>
         </div>
-        <textarea id="robotJSON" cols="35" rows="10"></textarea>
+        <textarea id="robotJSON" cols="45" rows="10"></textarea> <br>
+        <p>Program the robot:</p>
+        <textarea id="roboCode" cols="45" rows="25"></textarea> <br>
 
+        <p><button onclick="setRoboCode()">Flash code</button>Click <a href="/docs/help.html" target="_blank">here</a> for help and examples.</p>
         <div id="robottree">
         </div>
     </div>

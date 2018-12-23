@@ -10,6 +10,8 @@ class Robot {
 
         this.selector = 0;
         this.updateBuilder();
+
+        this.code = "";
     }
 
     build(id, component) {
@@ -37,9 +39,6 @@ class Robot {
         }
 
         for (var comp of this.components) {
-            if (comp.rotate) {
-                comp.rotate(0.5 * delta);
-            }
             if (comp === this.components[this.selector]) {
                 comp.mesh.material.emissive.setHex(0x003300);
             } else {
@@ -47,6 +46,7 @@ class Robot {
             }
         }
 
+        eval("var delta = " + delta + ";\n" + robot.code);
     }
 
     remove(index) {
@@ -64,21 +64,21 @@ class Robot {
             }
         }
 
-        this.removeFromComponents(toBeRemoved);
+        this.removeFromLists(toBeRemoved);
 
         this.selectLast();
     }
 
-    removeFromComponents(component) {
+    removeFromLists(component) {
         var index = this.components.findIndex(x => x.name == component.name);
         this.components.splice(index, 1);
 
         for (var child of component.childComponents) {
-            this.removeFromComponents(child);
+            this.removeFromLists(child);
         }
     }
 
-    selectedComp() {
+    getCurrentComponent() {
         return this.components[this.selector]
     }
 
@@ -87,7 +87,7 @@ class Robot {
     }
 
     updateBuilder() {
-        onSelectorChange(this.selectedComp(), this.selector);
+        onSelectorChange(this.getCurrentComponent(), this.selector);
     }
 
     selectorUp() {
@@ -116,7 +116,8 @@ class Robot {
         this.root = new Root({color: 0xffffff});
         scene.add(this.root.mesh);
 
-        this.parseJSON([[json, this.root]]);
+        this.code = json.code;
+        this.parseJSON([[json.robot, this.root]]);
     }
 
     parseJSON(queue) {
@@ -133,6 +134,8 @@ class Robot {
             component = new typeToClass[childJSON.type](childJSON.args);
         }
 
+        console.log(parentComponent, component);
+
         var parentIndex = this.components.findIndex(x => x.name == parentComponent.name)
         if (parentIndex == -1) {
             this.components.push(component);
@@ -145,6 +148,22 @@ class Robot {
         }
 
         this.parseJSON(queue);
+    }
 
+    toJSON() {
+        return {
+            robot: this.root.toJSON(),
+            code: this.code
+        }
+    }
+
+    // Convenience functions for programming the robot as a user
+    // These functions have short, clear names.
+    partByIndex(index) {
+        return this.components(index);
+    }
+
+    part(name) {
+        return this.components.filter(x => x.name == name)[0]
     }
 }
