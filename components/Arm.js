@@ -1,15 +1,14 @@
 
 class Arm extends Component{
-    constructor(color, length, offset, rotation) {
-        super(color, offset, rotation);
+    constructor(args) {
+        super(args);
 
-
-        this.length = length;
+        this.length = args.length;
+        this.color = args.color;
         this.standardOffset = new THREE.Matrix4().makeTranslation(0, this.length / 2, 0)
         this.connectPos = new THREE.Vector3(0, this.length, 0);
 
-        var geometry = this.generateGeometry()//new THREE.CylinderGeometry( 2, 2, this.length, 16 );
-        // geometry.applyMatrix(this.standardOffset);
+        var geometry = this.generateGeometry()
         var material = new THREE.MeshPhongMaterial( {color: this.color} );
         this.mesh = new THREE.Mesh( geometry, material );
     }
@@ -47,5 +46,13 @@ class Arm extends Component{
         var geometry = new THREE.CylinderGeometry(2, 2, this.length, 16);
         geometry.applyMatrix(new THREE.Matrix4().makeTranslation(0, this.length / 2, 0))
         return geometry
+    }
+
+    toJSON() {
+        var json = super.toJSON();
+        json.type = "Arm";
+        json.args.color = this.color;
+        json.args.length = this.length;
+        return json;
     }
 }

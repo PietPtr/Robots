@@ -53,7 +53,7 @@ var light = new THREE.AmbientLight( 0x404040 ); // soft white light
 scene.add( light );
 
 
-var root = new Arm(0xffff00, 5);
+var root = new Arm({color: 0xffff00, length: 5});
 var robot = new Robot(root);
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -61,9 +61,15 @@ var robot = new Robot(root);
 //////////////////////////////////////////////////////////////////////////////////
 
 window.addEventListener('resize', function(){
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.aspect = window.innerWidth / window.innerHeight;
+    width = window.innerWidth / 1.5;
+    height = window.innerHeight;
+    renderer.setSize(width, height);
+    camera.aspect = width / height;
     camera.updateProjectionMatrix();
+
+    container = document.getElementById('threejs');
+    container.style.width = width + "px";
+    container.style.height = height + "px";
 }, false);
 
 onRenderFcts.push(function(){

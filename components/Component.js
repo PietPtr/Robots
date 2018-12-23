@@ -1,8 +1,10 @@
 
 class Component {
-    constructor(color, offset, rotation) {
+    constructor(args) {
+        var offset = args.offset;
+        var rotation = args.rotation;
+
         this.parent = undefined;
-        this.color = color;
         this.offset = (offset === undefined) ? new THREE.Vector3(0, 0, 0) : offset;
         this.rotation = (rotation === undefined) ? new THREE.Vector3(0, 0, 0) : rotation;
         this.connectPos = new THREE.Vector3(0, 0, 0);
@@ -64,5 +66,15 @@ class Component {
             this.originalPosition.y + this.offset.y,
             this.originalPosition.z + this.offset.z);
         this.mesh.rotation.set(this.rotation.x, this.rotation.y, this.rotation.z);
+    }
+
+    toJSON() {
+        var children = this.childComponents.map((child) => child.toJSON());
+
+        return {
+            type: "Component",
+            args: {offset: this.offset, rotation: this.rotation},
+            children: children
+        }
     }
 }

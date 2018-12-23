@@ -47,3 +47,38 @@ function confirmEdit() {
     robot.components[index].applyVars();
 
 }
+
+const typeToClass = {"Arm": Arm, "Servo": Servo, "Tracer": Tracer};
+
+function exportRobot(robot) {
+    textarea = document.getElementById("robotJSON");
+    textarea.value = JSON.stringify(robot.root.toJSON());
+}
+
+function importRobot(robot) {
+    textarea = document.getElementById("robotJSON");
+    json = JSON.parse(textarea.value);
+    // TODO: add real invisible root to the robot, instead of small arm
+    robot.root = new typeToClass[json.type](json.args)
+    // console.log(robot.root)
+    console.log(test([[json, {}]]));
+
+}
+
+function test(queue) {
+    var current = queue.shift();
+    if (current === undefined) {
+        return;
+    }
+
+    for (var child of current[0].children) {
+        queue.push([child, current[0]]);
+    }
+
+    console.log(current[1].type, current[0].type, current[0].children.length);
+
+
+
+    test(queue);
+
+}

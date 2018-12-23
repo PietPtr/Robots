@@ -1,7 +1,9 @@
 
 class Tracer extends Component{
-    constructor(color, max, offset, rotation) {
-        super(color, offset, rotation)
+    constructor(args) {
+        super(args);
+        var color = args.color;
+        var max = args.max;
 
         this.color = color;
         this.max = max;
@@ -38,7 +40,6 @@ class Tracer extends Component{
         var vars = super.getVars();
         vars.tracerColor = numToHexColor(this.color);
         vars.tracerLength = this.max;
-
         return vars;
     }
 
@@ -46,8 +47,16 @@ class Tracer extends Component{
         super.setVars(vars);
 
         if (vars.tracerColor && vars.tracerLength) {
-            this.color = hexToNumColor(vars.servoColor);
+            this.color = hexToNumColor(vars.tracerColor);
             this.max = parseFloat(vars.tracerLength);
         }
+    }
+
+    toJSON() {
+        var json = super.toJSON();
+        json.type = "Tracer";
+        json.args.color = this.color;
+        json.args.max = this.max;
+        return json;
     }
 }

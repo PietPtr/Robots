@@ -15,9 +15,9 @@
 <!-- <div style='position: absolute; top: 0px; width: 100%;font-family:arial; font-weight: bolder; padding-top: 5px;'> -->
 <body style='margin: 0px; overflow: hidden;'>
     <div id="builder" class="" style="left:0">
-        <button style="top:30px; width: 80px" id="node" class="ui" onclick="robot.buildAtSelector(new Arm(0xffff00, 10))">Arm</button>
-        <button style="top:30px; width: 80px" id="node" class="ui" onclick="robot.buildAtSelector(new Servo(0x0099ff))">Servo</button>
-        <button style="top:30px; width: 80px" id="node" class="ui" onclick="robot.buildAtSelector(new Tracer(0xff0000, 1000))">Tracer</button>
+        <button style="top:30px; width: 80px" id="node" class="ui" onclick="robot.buildAtSelector(new Arm({color: 0xffff00, length: 10}))">Arm</button>
+        <button style="top:30px; width: 80px" id="node" class="ui" onclick="robot.buildAtSelector(new Servo({color: 0x0099ff}))">Servo</button>
+        <button style="top:30px; width: 80px" id="node" class="ui" onclick="robot.buildAtSelector(new Tracer({color: 0xff0000, max: 1000}))">Tracer</button>
         <br>
         <div id="selector">
             Select other component
@@ -51,6 +51,11 @@
             Z <input type="number" id="rotz"/> <br>
         </div>
         <button onClick="confirmEdit()">Confirm</button>
+        <div>
+            <button onClick="importRobot(robot)">Import</button>
+            <button onClick="exportRobot(robot)">Export</button>
+        </div>
+        <textarea id="robotJSON" cols="35" rows="10"></textarea>
 
         <div id="robottree">
         </div>
