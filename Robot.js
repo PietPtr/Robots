@@ -1,8 +1,8 @@
 
 
 class Robot {
-    constructor(root) {
-        this.root = root;
+    constructor() {
+        this.root = new Root({color: 0xffffff});
         scene.add(this.root.mesh);
 
         this.tracers = []
@@ -98,5 +98,42 @@ class Robot {
     selectLast() {
         this.selector = this.components.length - 1;
         this.updateBuilder();
+    }
+
+    fromJSON(json) {
+        this.components = [];
+        this.root = new Root({color: 0xab55ab});
+        scene.add(this.root.mesh);
+
+        this.parseJSON([[json, this.root]]);
+    }
+
+    parseJSON(queue) {
+        var current = queue.shift();
+        if (current === undefined) {
+            return;
+        }
+        var parentComponent = current[1];
+        var childJSON = current[0];
+
+
+        var component = parentComponent;
+        if (childJSON.type != "Root") {
+            component = new typeToClass[childJSON.type](childJSON.args);
+        }
+
+        var parentIndex = this.components.findIndex(x => x.name == parentComponent.name)
+        if (parentIndex == -1) {
+            this.components.push(component);
+        } else {
+            this.build(parentIndex, component);
+        }
+
+        for (var child of childJSON.children) {
+            queue.push([child, component]);
+        }
+
+        this.parseJSON(queue);
+
     }
 }

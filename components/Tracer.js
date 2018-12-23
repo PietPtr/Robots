@@ -8,7 +8,6 @@ class Tracer extends Component{
         this.color = color;
         this.max = max;
         this.points = [];
-        this.name = "line" + Math.random() * 100000;
 
         var geometry = new THREE.SphereGeometry(2.9, 32, 32);
         var material = new THREE.MeshPhongMaterial( {color: this.color });

@@ -4,6 +4,7 @@ class Component {
         var offset = args.offset;
         var rotation = args.rotation;
 
+        this.name = args.name || Math.random().toString(16).substring(2);
         this.parent = undefined;
         this.offset = (offset === undefined) ? new THREE.Vector3(0, 0, 0) : offset;
         this.rotation = (rotation === undefined) ? new THREE.Vector3(0, 0, 0) : rotation;
@@ -72,8 +73,9 @@ class Component {
         var children = this.childComponents.map((child) => child.toJSON());
 
         return {
+            name: this.name,
             type: "Component",
-            args: {offset: this.offset, rotation: this.rotation},
+            args: {offset: this.offset, rotation: this.rotation, name: this.name},
             children: children
         }
     }
