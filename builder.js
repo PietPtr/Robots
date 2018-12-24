@@ -53,23 +53,45 @@ function confirmEdit() {
 
 const typeToClass = {"Arm": Arm, "Servo": Servo, "Tracer": Tracer};
 
+function robotJSONString(robot) {
+    return JSON.stringify(robot.toJSON());
+}
+
 function exportRobot(robot) {
     textarea = document.getElementById("robotJSON");
-    textarea.value = JSON.stringify(robot.toJSON());
+    textarea.value = robotJSONString(robot);
 }
 
 function importRobot() {
     textarea = document.getElementById("robotJSON");
     json = JSON.parse(textarea.value);
+    var robot = setRobotFromJSON(json);
 
-    scene.remove(robot.root.mesh);
+    codearea = document.getElementById("roboCode");
+    codearea.value = json.code;
 
-    robot = new Robot()
-    robot.fromJSON(json);
+    return robot;
 }
 
-function checkRoboCode() {
+function setRobotFromJSON(json) {
+    var robot = new Robot()
+    robot.fromJSON(json);
 
+    return robot;
+}
+
+function saveRobot(robot) {
+    localStorage.setItem("robot", robotJSONString(robot));
+}
+
+function loadRobot() {
+    var json = JSON.parse(localStorage.getItem("robot"));
+    var robot = setRobotFromJSON(json);
+
+    codearea = document.getElementById("roboCode");
+    codearea.value = json.code;
+
+    return robot;
 }
 
 function setRoboCode() {
@@ -78,12 +100,20 @@ function setRoboCode() {
 
 function addSelectedToCode() {
     var codeArea = document.getElementById("roboCode");
-    console.log(codeArea.selectionStart, codeArea.selectionEnd);
+
     var code = codeArea.value;
     code = code.slice(0, codeArea.selectionStart) +
             "robot.part('" + robot.getCurrentComponent().name + "')"
             + code.slice(codeArea.selectionEnd, code.length);
 
-    console.log(code);
     codeArea.value = code;
+}
+
+function clearRobot() {
+    if (confirm("Are you sure you want to clear the robot?")) {
+        robot.removeFromScene(scene);
+        robot = new Robot();
+        robot.addToScene(scene);
+        document.getElementById("roboCode").value = robot.code;
+    }
 }

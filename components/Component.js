@@ -4,7 +4,7 @@ class Component {
         var offset = args.offset;
         var rotation = args.rotation;
 
-        this.name = args.name || Math.random().toString(16).substring(2);
+        this.name = args.name || "comp" + Component.number;
         this.parent = undefined;
         this.offset = (offset === undefined) ? new THREE.Vector3(0, 0, 0) : offset;
         this.rotation = (rotation === undefined) ? new THREE.Vector3(0, 0, 0) : rotation;
@@ -13,6 +13,8 @@ class Component {
         this.mesh = undefined;
         this.parent = undefined;
         this.childComponents = []
+
+        Component.number++;
     }
 
     add(component) {
@@ -82,3 +84,5 @@ class Component {
         }
     }
 }
+
+Component.number = 0;

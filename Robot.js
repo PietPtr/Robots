@@ -3,7 +3,6 @@
 class Robot {
     constructor() {
         this.root = new Root({color: 0xffffff});
-        scene.add(this.root.mesh);
 
         this.tracers = []
         this.components = [this.root]
@@ -12,6 +11,14 @@ class Robot {
         this.updateBuilder();
 
         this.code = "";
+    }
+
+    addToScene(scene) {
+        scene.add(this.root.mesh);
+    }
+
+    removeFromScene(scene) {
+        scene.remove(this.root.mesh);
     }
 
     build(id, component) {
@@ -133,8 +140,6 @@ class Robot {
         if (childJSON.type != "Root") {
             component = new typeToClass[childJSON.type](childJSON.args);
         }
-
-        console.log(parentComponent, component);
 
         var parentIndex = this.components.findIndex(x => x.name == parentComponent.name)
         if (parentIndex == -1) {

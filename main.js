@@ -43,9 +43,9 @@ var onRenderFcts = [];
 // Initialise scene and camera
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(70, width / height, 0.01, 1000);
-camera.position.x = 0;
+camera.position.x = -50;
 camera.position.y = 40
-camera.position.z = 80;
+camera.position.z = 50;
 var controls = new THREE.OrbitControls(camera, container);
 
 
@@ -61,14 +61,11 @@ var intersected;
 var directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
 directionalLight.target.position.set(-1, 0, -1);
 scene.add(directionalLight.target);
-scene.add( directionalLight );
+scene.add(directionalLight);
 var light = new THREE.AmbientLight( 0x404040 ); // soft white light
-scene.add( light );
+scene.add(light);
 
-
-var robot = new Robot();
-
-var roboCode = "";
+robot = loadRobot();
 
 //////////////////////////////////////////////////////////////////////////////////
 //		Rendering
@@ -86,6 +83,13 @@ window.addEventListener('resize', function(){
     container.style.height = height + "px";
 }, false);
 
+// window.addEventListener('keydown', function() {
+// 	if (event.keyCode == 83 && event.ctrlKey) {
+// 		saveRobot(robot);
+// 		event.preventDefault();
+// 	}
+// }, true);
+
 container.addEventListener('mousemove', function() {
 	event.preventDefault();
     var diffW = window.innerWidth - width
@@ -100,11 +104,14 @@ container.addEventListener('click', function() {
 }, false);
 
 container.addEventListener('keypress', function() {
+	console.log(event.keyCode)
 	if (event.keyCode == 127) {
 		robot.removeSelected();
 	}
 
 }, false);
+
+
 
 onRenderFcts.push(function(){
     raycaster.setFromCamera( mouse, camera );

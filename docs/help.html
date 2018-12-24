@@ -2,7 +2,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Example Domain</title>
+    <title>Robot Docs</title>
 
     <meta charset="utf-8" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -16,11 +16,14 @@
 
     }
     div {
-        width: 600px;
+        width: 1000px;
         margin: 5em auto;
         padding: 50px;
         background-color: #fff;
         border-radius: 1em;
+    }
+    .code {
+        font-family: "Courier"
     }
     a:link, a:visited {
         color: #38488f;
@@ -43,7 +46,20 @@
 <body>
 <div>
     <h1>Help</h1>
-    <p>RTFC</p>
+    <h3>Basics</h3>
+    <p>Click on parts to select them. Once selected they turn green. Click 'Add to code' to insert an expression into the code at the current cursor position that evaluates to the selected component. Then just use the functions listed below for the relevant parts to make the robot move.</p>
+    <p>The <span class="code">delta</span> variable is the amount of seconds since the last frame.</p>
+    <h3>Servo</h3>
+    <h4 class="code">.rotate(radials)</h4>
+    <p>Rotate servo's as follows: <span class="code">robot.part("abcdef01").rotate(delta);</span> This will rotate the servo at 2 PI radials per second.</p>
+    <h4 class="code">.angle()</h4>
+    <p>Get the current angle of the servo.</p>
+    <h3>Arm</h3>
+    <h3>Tracer</h3>
+    <h3>Examples</h3>
+    <p class="code">
+    {"robot":{"name":"33d148540479","type":"Root","args":{"offset":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"name":"33d148540479","color":16777215},"children":[{"name":"64cc98700a212","type":"Arm","args":{"offset":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"name":"64cc98700a212","color":16776960,"length":10},"children":[{"name":"538985a2cb0f6","type":"Servo","args":{"offset":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"name":"538985a2cb0f6","color":39423},"children":[{"name":"6e66c59857835","type":"Arm","args":{"offset":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"name":"6e66c59857835","color":16776960,"length":10},"children":[]}]}]}]},"code":"robot.part('538985a2cb0f6').rotate(delta);"}
+    <p>
 </div>
 </body>
 </html>

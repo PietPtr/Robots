@@ -18,10 +18,6 @@ class Servo extends Component{
         this.holderMesh = new THREE.Mesh(holderGeom, material);
     }
 
-    rotate(delta) {
-        this.mesh.rotation.z += delta;
-    }
-
     onAdd(parent) {
         super.onAdd(parent);
         parent.mesh.add(this.holderMesh)
@@ -68,4 +64,15 @@ class Servo extends Component{
         json.args.color = this.color;
         return json;
     }
+
+    // User programming functions
+
+    rotate(delta) {
+        this.mesh.rotation.z += delta;
+    }
+
+    angle() {
+        return (this.mesh.rotation.z * 180 / Math.PI) % 360;
+    }
+
 }

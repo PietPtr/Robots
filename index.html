@@ -53,15 +53,17 @@
         </div>
         <button onClick="confirmEdit()">Confirm</button>
         <button onclick="addSelectedToCode()">Add to code</button>
-        <div>
-            <button onClick="importRobot(robot)">Import</button>
-            <button onClick="exportRobot(robot)">Export</button>
-        </div>
-        <textarea id="robotJSON" cols="45" rows="10"></textarea> <br>
         <p>Program the robot:</p>
         <textarea id="roboCode" cols="45" rows="25"></textarea> <br>
-
         <p><button onclick="setRoboCode()">Flash code</button>Click <a href="/docs/help.html" target="_blank">here</a> for help and examples.</p>
+        <div>
+            <button onClick="robot.removeFromScene(scene); robot = importRobot()">Import</button>
+            <button onClick="exportRobot(robot)">Export</button>
+            <button onClick="saveRobot(robot)">Save</button>
+            <button onClick="robot.removeFromScene(scene); robot = loadRobot()">Load</button>
+            <button onClick="clearRobot()">Clear</button>
+        </div>
+        <textarea id="robotJSON" cols="45" rows="10"></textarea> <br>
         <div id="robottree">
         </div>
     </div>
