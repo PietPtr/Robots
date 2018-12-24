@@ -6,7 +6,7 @@ class Root extends Component{
 
         this.color = color;
 
-        var geometry = new THREE.SphereGeometry(2, 32, 32);
+        var geometry = new THREE.BoxGeometry(4.1, 4, 4.1);
         var material = new THREE.MeshPhongMaterial( {color: this.color });
         this.mesh = new THREE.Mesh(geometry, material);
         this.mesh.name = "RobotRoot" + this.name

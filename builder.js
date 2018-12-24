@@ -82,6 +82,7 @@ function setRobotFromJSON(json) {
 
 function saveRobot(robot) {
     localStorage.setItem("robot", robotJSONString(robot));
+    updateSaveIndicator(robot);
 }
 
 function loadRobot() {
@@ -115,5 +116,19 @@ function clearRobot() {
         robot = new Robot();
         robot.addToScene(scene);
         document.getElementById("roboCode").value = robot.code;
+    }
+}
+
+// Compares the current robot to the one stored, and sets the UI accordingly
+function updateSaveIndicator(robot) {
+    var savedString = localStorage.getItem("robot");
+    var currentString = JSON.stringify(robot.toJSON());
+
+    var indicator = document.getElementById("saveIndicator")
+
+    if (savedString == currentString) {
+        indicator.innerHTML = "";
+    } else {
+        indicator.innerHTML = "*"
     }
 }

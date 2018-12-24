@@ -1,24 +1,4 @@
 //////////////////////////////////////////////////////////////////////////////////
-//		HTML bullshit
-//////////////////////////////////////////////////////////////////////////////////
-// function toggleBuilder() {
-//     var elem = document.getElementById("builder");
-//     if (elem.style.display === "none") {
-//         elem.style.display = "block";
-//     } else {
-//         elem.style.display = "none";
-//     }
-// }
-
-function onDocumentMouseMove( event ) {
-				event.preventDefault();
-				mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-				mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-			}
-
-
-
-//////////////////////////////////////////////////////////////////////////////////
 //		Initialisation
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -83,12 +63,12 @@ window.addEventListener('resize', function(){
     container.style.height = height + "px";
 }, false);
 
-// window.addEventListener('keydown', function() {
-// 	if (event.keyCode == 83 && event.ctrlKey) {
-// 		saveRobot(robot);
-// 		event.preventDefault();
-// 	}
-// }, true);
+window.addEventListener('keydown', function() {
+	if (event.keyCode == 83 && event.ctrlKey) {
+		saveRobot(robot);
+		event.preventDefault();
+	}
+}, true);
 
 container.addEventListener('mousemove', function() {
 	event.preventDefault();
@@ -99,17 +79,16 @@ container.addEventListener('mousemove', function() {
 
 container.addEventListener('click', function() {
 	if (intersected) {
-		robot.selector = robot.components.findIndex(x => x.mesh.uuid == intersected.uuid)
+		robot.setSelector(robot.components.findIndex(x => x.mesh.uuid == intersected.uuid));
 	}
 }, false);
 
-container.addEventListener('keypress', function() {
-	console.log(event.keyCode)
-	if (event.keyCode == 127) {
-		robot.removeSelected();
-	}
-
-}, false);
+// canvas.addEventListener('keydown', function() {
+// 	console.log(event.keyCode)
+// 	if (event.keyCode == 127) {
+// 		robot.removeSelected();
+// 	}
+// }, false);
 
 
 

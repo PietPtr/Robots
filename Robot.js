@@ -2,7 +2,7 @@
 
 class Robot {
     constructor() {
-        this.root = new Root({color: 0xffffff});
+        this.root = new Root({color: 0xffff00});
 
         this.tracers = []
         this.components = [this.root]
@@ -118,9 +118,14 @@ class Robot {
         this.updateBuilder();
     }
 
+    setSelector(index) {
+        this.selector = index;
+        this.updateBuilder();
+    }
+
     fromJSON(json) {
         this.components = [];
-        this.root = new Root({color: 0xffffff});
+        this.root = new Root({color: 0xffff00});
         scene.add(this.root.mesh);
 
         this.code = json.code;

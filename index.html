@@ -16,15 +16,15 @@
 <!-- <div style='position: absolute; top: 0px; width: 100%;font-family:arial; font-weight: bolder; padding-top: 5px;'> -->
 <body style='margin: 0px; overflow: hidden;'>
     <div id="builder" class="" style="left:0">
-        <button style="top:30px; width: 80px" id="node" class="ui" onclick="robot.buildAtSelector(new Arm({color: 0xffff00, length: 10}))">Arm</button>
-        <button style="top:30px; width: 80px" id="node" class="ui" onclick="robot.buildAtSelector(new Servo({color: 0x0099ff}))">Servo</button>
-        <button style="top:30px; width: 80px" id="node" class="ui" onclick="robot.buildAtSelector(new Tracer({color: 0xff0000, max: 1000}))">Tracer</button>
+        <button style="top:30px; width: 80px" id="node" class="ui" onclick="robot.buildAtSelector(new Arm({color: 0xffff00, length: 10})); updateSaveIndicator(robot);">Arm</button>
+        <button style="top:30px; width: 80px" id="node" class="ui" onclick="robot.buildAtSelector(new Servo({color: 0x0099ff})); updateSaveIndicator(robot);">Servo</button>
+        <button style="top:30px; width: 80px" id="node" class="ui" onclick="robot.buildAtSelector(new Tracer({color: 0xff0000, max: 1000})); updateSaveIndicator(robot);">Tracer</button>
         <br>
         <div id="selector">
             Select other component
             <button class="ui" onclick="robot.selectorDown()"><</button>
             <button class="ui" onclick="robot.selectorUp()">></button>
-            <button class="ui" onclick="robot.removeSelected()">Delete</button>
+            <button class="ui" onclick="robot.removeSelected(); updateSaveIndicator(robot);">Delete</button>
         </div>
         <input id="componentIndex" style="display:none">
         <div id="servoEditor" style="display:none">
@@ -55,13 +55,14 @@
         <button onclick="addSelectedToCode()">Add to code</button>
         <p>Program the robot:</p>
         <textarea id="roboCode" cols="45" rows="25"></textarea> <br>
-        <p><button onclick="setRoboCode()">Flash code</button>Click <a href="/docs/help.html" target="_blank">here</a> for help and examples.</p>
+        <p><button onclick="setRoboCode(); updateSaveIndicator(robot)">Flash code</button>Click <a href="/docs/help.html" target="_blank">here</a> for help and examples.</p>
         <div>
             <button onClick="robot.removeFromScene(scene); robot = importRobot()">Import</button>
             <button onClick="exportRobot(robot)">Export</button>
             <button onClick="saveRobot(robot)">Save</button>
             <button onClick="robot.removeFromScene(scene); robot = loadRobot()">Load</button>
             <button onClick="clearRobot()">Clear</button>
+            <span id="saveIndicator"></span>
         </div>
         <textarea id="robotJSON" cols="45" rows="10"></textarea> <br>
         <div id="robottree">
