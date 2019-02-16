@@ -65,12 +65,12 @@ function exportRobot(robot) {
 function importRobot() {
     textarea = document.getElementById("robotJSON");
     json = JSON.parse(textarea.value);
-    var robot = setRobotFromJSON(json);
+    robot.removeFromScene(scene);
+    robot = setRobotFromJSON(json);
+    robot.addToScene(scene);
 
     codearea = document.getElementById("roboCode");
     codearea.value = json.code;
-
-    return robot;
 }
 
 function setRobotFromJSON(json) {
@@ -86,13 +86,18 @@ function saveRobot(robot) {
 }
 
 function loadRobot() {
-    var json = JSON.parse(localStorage.getItem("robot"));
-    var robot = setRobotFromJSON(json);
+    var string = localStorage.getItem("robot")
 
-    codearea = document.getElementById("roboCode");
-    codearea.value = json.code;
+    if (string == null) {
+        return new Robot();
+    } else {
+        var json = JSON.parse(string);
+        var robot = setRobotFromJSON(json);
 
-    return robot;
+        codearea = document.getElementById("roboCode");
+        codearea.value = json.code;
+        return robot;
+    }
 }
 
 function setRoboCode() {
@@ -120,7 +125,7 @@ function clearRobot() {
 }
 
 // Compares the current robot to the one stored, and sets the UI accordingly
-function updateSaveIndicator(robot) {
+function updateSaveIndicator() {
     var savedString = localStorage.getItem("robot");
     var currentString = JSON.stringify(robot.toJSON());
 

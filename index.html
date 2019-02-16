@@ -51,17 +51,17 @@
             Y <input type="number" id="roty"/> <br>
             Z <input type="number" id="rotz"/> <br>
         </div>
-        <button onClick="confirmEdit()">Confirm</button>
+        <button onClick="confirmEdit(); updateSaveIndicator(robot)">Confirm</button>
         <button onclick="addSelectedToCode()">Add to code</button>
         <p>Program the robot:</p>
         <textarea id="roboCode" cols="45" rows="25"></textarea> <br>
         <p><button onclick="setRoboCode(); updateSaveIndicator(robot)">Flash code</button>Click <a href="/docs/help.html" target="_blank">here</a> for help and examples.</p>
         <div>
-            <button onClick="robot.removeFromScene(scene); robot = importRobot()">Import</button>
+            <button onClick="importRobot(); updateSaveIndicator(robot)">Import</button>
             <button onClick="exportRobot(robot)">Export</button>
             <button onClick="saveRobot(robot)">Save</button>
-            <button onClick="robot.removeFromScene(scene); robot = loadRobot()">Load</button>
-            <button onClick="clearRobot()">Clear</button>
+            <button onClick="robot.removeFromScene(scene); loadRobot()">Load</button>
+            <button onClick="clearRobot(); updateSaveIndicator(robot)">Clear</button>
             <span id="saveIndicator"></span>
         </div>
         <textarea id="robotJSON" cols="45" rows="10"></textarea> <br>

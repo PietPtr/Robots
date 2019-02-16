@@ -43,7 +43,7 @@ class Arm extends Component{
     }
 
     generateGeometry() {
-        var geometry = new THREE.CylinderGeometry(2, 2, this.length, 16);
+        var geometry = new THREE.CylinderGeometry(1.8, 1.8, this.length, 16);
         geometry.applyMatrix(new THREE.Matrix4().makeTranslation(0, this.length / 2, 0))
         return geometry
     }

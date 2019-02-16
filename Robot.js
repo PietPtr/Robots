@@ -126,7 +126,6 @@ class Robot {
     fromJSON(json) {
         this.components = [];
         this.root = new Root({color: 0xffff00});
-        scene.add(this.root.mesh);
 
         this.code = json.code;
         this.parseJSON([[json.robot, this.root]]);

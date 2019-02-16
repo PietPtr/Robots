@@ -46,6 +46,7 @@ var light = new THREE.AmbientLight( 0x404040 ); // soft white light
 scene.add(light);
 
 robot = loadRobot();
+robot.addToScene(scene);
 
 //////////////////////////////////////////////////////////////////////////////////
 //		Rendering
@@ -82,15 +83,6 @@ container.addEventListener('click', function() {
 		robot.setSelector(robot.components.findIndex(x => x.mesh.uuid == intersected.uuid));
 	}
 }, false);
-
-// canvas.addEventListener('keydown', function() {
-// 	console.log(event.keyCode)
-// 	if (event.keyCode == 127) {
-// 		robot.removeSelected();
-// 	}
-// }, false);
-
-
 
 onRenderFcts.push(function(){
     raycaster.setFromCamera( mouse, camera );

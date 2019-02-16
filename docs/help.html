@@ -15,12 +15,15 @@
         font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
     }
-    div {
+    .main {
         width: 1000px;
         margin: 5em auto;
         padding: 50px;
         background-color: #fff;
         border-radius: 1em;
+    }
+    .toggleable {
+        display: hidden;
     }
     .code {
         font-family: "Courier"
@@ -41,10 +44,20 @@
         }
     }
     </style>
+    <script>
+        function toggleElement(id) {
+            var x = document.getElementById(id);
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
 </head>
 
 <body>
-<div>
+<div class='main'>
     <h1>Help</h1>
     <h3>Basics</h3>
     <p>Click on parts to select them. Once selected they turn green. Click 'Add to code' to insert an expression into the code at the current cursor position that evaluates to the selected component. Then just use the functions listed below for the relevant parts to make the robot move.</p>
@@ -57,9 +70,18 @@
     <h3>Arm</h3>
     <h3>Tracer</h3>
     <h3>Examples</h3>
+    Simple single motor arm <br>
+    <button onclick="toggleElement('simple')">hide/show code</button>
+    <div id='simple' class='toggleable'>
+        <p class="code">
+        {"robot":{"name":"33d148540479","type":"Root","args":{"offset":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"name":"33d148540479","color":16777215},"children":[{"name":"64cc98700a212","type":"Arm","args":{"offset":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"name":"64cc98700a212","color":16776960,"length":10},"children":[{"name":"538985a2cb0f6","type":"Servo","args":{"offset":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"name":"538985a2cb0f6","color":39423},"children":[{"name":"6e66c59857835","type":"Arm","args":{"offset":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"name":"6e66c59857835","color":16776960,"length":10},"children":[]}]}]}]},"code":"robot.part('538985a2cb0f6').rotate(delta);"}
+        </p>
+    </div> <br>
+
+    Clock <br>
     <p class="code">
-    {"robot":{"name":"33d148540479","type":"Root","args":{"offset":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"name":"33d148540479","color":16777215},"children":[{"name":"64cc98700a212","type":"Arm","args":{"offset":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"name":"64cc98700a212","color":16776960,"length":10},"children":[{"name":"538985a2cb0f6","type":"Servo","args":{"offset":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"name":"538985a2cb0f6","color":39423},"children":[{"name":"6e66c59857835","type":"Arm","args":{"offset":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"name":"6e66c59857835","color":16776960,"length":10},"children":[]}]}]}]},"code":"robot.part('538985a2cb0f6').rotate(delta);"}
-    <p>
+    {"robot":{"name":"comp7wsubeuf7up","type":"Root","args":{"offset":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"name":"comp7wsubeuf7up","color":16776960},"children":[{"name":"compsgmc2eugvwj","type":"Arm","args":{"offset":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":3.141592653589793,"z":0},"name":"compsgmc2eugvwj","color":16776960,"length":1},"children":[{"name":"comps3qn0827n3","type":"Servo","args":{"offset":{"x":0,"y":0,"z":-1},"rotation":{"x":0,"y":0,"z":0},"name":"comps3qn0827n3","color":39423},"children":[{"name":"comp098a44733sk6","type":"Arm","args":{"offset":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"name":"comp098a44733sk6","color":16776960,"length":10},"children":[{"name":"compbsipsgjyzr","type":"Arm","args":{"offset":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"name":"compbsipsgjyzr","color":16776960,"length":10},"children":[{"name":"compyqw85qw04cs","type":"Arm","args":{"offset":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"name":"compyqw85qw04cs","color":16776960,"length":10},"children":[]}]}]}]},{"name":"compemw4t8m04vi","type":"Servo","args":{"offset":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"name":"compemw4t8m04vi","color":39423},"children":[{"name":"compxin3jc28xyf","type":"Arm","args":{"offset":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"name":"compxin3jc28xyf","color":16776960,"length":15},"children":[]}]},{"name":"compxf5dqi3cs9","type":"Servo","args":{"offset":{"x":0,"y":0,"z":1},"rotation":{"x":0,"y":0,"z":0},"name":"compxf5dqi3cs9","color":39423},"children":[{"name":"comp3sjl6phmg71","type":"Arm","args":{"offset":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"name":"comp3sjl6phmg71","color":0,"length":20},"children":[]}]}]}]},"code":"var d = new Date();\nvar seconds = d.getHours() * 60 * 60 + d.getMinutes() * 60 + d.getSeconds();\n\nvar minfrac = (d.getMinutes() * 60 + d.getSeconds()) / 3600\n\nvar hourfrac = (seconds % (43200)) / 43200;\n\nvar secfrac = d.getSeconds() / 60;\n\nrobot.part('comps3qn0827n3').mesh.rotation.z = minfrac * Math.PI * 2\n\nrobot.part('compemw4t8m04vi').mesh.rotation.z = hourfrac * Math.PI * 2\n\nrobot.part('compxf5dqi3cs9').mesh.rotation.z = secfrac * Math.PI * 2"}
+    </p>
 </div>
 </body>
 </html>
